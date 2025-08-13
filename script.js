@@ -90,13 +90,30 @@ topMenuEl.addEventListener('click', function(event){
 
     if (!event.target.matches('a')) return;
 
+    // Adding Submenu Interactions 
+    let linkObj;
+    for(let i = 0; i < menuLinks.length; i++){
+        if(menuLinks[i].text === event.target.textContent){
+            linkObj = menuLinks[i];
+            break;
+        }
+    }
+
     // Toggle
     if (event.target.classList.contains('active')){
         event.target.classList.remove('active');
+        subMenuEl.style.top = "0";
     } else {
         topMenuLinks.forEach(link => {
             link.classList.remove('active');
             event.target.classList.add('active');
+
+            if(linkObj && linkObj.subLinks){
+                subMenuEl.style.top = "100%";
+            } else {
+                subMenuEl.style.top = "0";
+            }
+
         });
     }
 
