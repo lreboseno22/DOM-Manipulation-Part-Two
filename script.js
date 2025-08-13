@@ -56,6 +56,16 @@ for (const link of menuLinks) {
 // Second Part of Lab
 // Creating the Submenu
 
+let subMenuEl = document.getElementById("sub-menu");
 
+subMenuEl.style.height = "100%";
+subMenuEl.style.backgroundColor = `var(--sub-menu-bg)`;
+subMenuEl.classList.add("flex-around");
+
+// temporarily hide subMenuEl
+subMenuEl.style.position = "absolute";
+subMenuEl.style.top = "0";
+
+// Adding Menu Interaction
 
 });
