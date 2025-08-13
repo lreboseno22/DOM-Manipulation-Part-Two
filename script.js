@@ -36,7 +36,23 @@ topMenuEl.classList.add('flex-around');
 // Part Three
 
 // Menu data structure
-var menuLinks = [ { text: 'about', href: '/about' }, { text: 'catalog', href: '/catalog' }, { text: 'orders', href: '/orders' },{ text: 'account', href: '/account' } ];
+var menuLinks = [
+  {text: 'about', href: '/about'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
+];
 
 // Iterate over the entire menuLinks array and for each "link" object
 //  - Create an <a> element
@@ -67,5 +83,26 @@ subMenuEl.style.position = "absolute";
 subMenuEl.style.top = "0";
 
 // Adding Menu Interaction
+let topMenuLinks = this.querySelectorAll("a");
+
+topMenuEl.addEventListener('click', function(event){
+    event.preventDefault();
+
+    if (!event.target.matches('a')) return;
+
+    // Toggle
+    if (event.target.classList.contains('active')){
+        event.target.classList.remove('active');
+    } else {
+        topMenuLinks.forEach(link => {
+            link.classList.remove('active');
+            event.target.classList.add('active');
+        });
+    }
+
+    console.log(event.target.textContent);
+})
+
+
 
 });
