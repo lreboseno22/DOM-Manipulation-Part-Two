@@ -92,14 +92,14 @@ topMenuEl.addEventListener('click', function(event){
 
     // Adding Submenu Interactions 
     let linkObj;
-    for(let i = 0; i < menuLinks.length; i++){
-        if(menuLinks[i].text === event.target.textContent){
+    for (let i = 0; i < menuLinks.length; i++){
+        if (menuLinks[i].text === event.target.textContent){
             linkObj = menuLinks[i];
             break;
         }
     }
 
-    // Toggle
+    // Toggle Hide vs Show
     if (event.target.classList.contains('active')){
         event.target.classList.remove('active');
         subMenuEl.style.top = "0";
@@ -108,18 +108,27 @@ topMenuEl.addEventListener('click', function(event){
             link.classList.remove('active');
             event.target.classList.add('active');
 
-            if(linkObj && linkObj.subLinks){
+            if (linkObj && linkObj.subLinks){
                 subMenuEl.style.top = "100%";
+                buildSubMenu(linkObj.subLinks);
             } else {
                 subMenuEl.style.top = "0";
             }
-
         });
     }
 
     console.log(event.target.textContent);
 })
 
-
+// Helper Function to make subMenu dynamic
+function buildSubMenu(subLinks){
+    subMenuEl.textContent = "";
+    subLinks.forEach(function(link){
+        let a = document.createElement("a");
+        a.setAttribute("href", link.href);
+        a.textContent = link.text;
+        subMenuEl.appendChild(a);
+    })
+}
 
 });
