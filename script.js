@@ -83,7 +83,7 @@ subMenuEl.style.position = "absolute";
 subMenuEl.style.top = "0";
 
 // Adding Menu Interaction
-let topMenuLinks = this.querySelectorAll("a");
+let topMenuLinks = topMenuEl.querySelectorAll("a");
 
 topMenuEl.addEventListener('click', function(event){
     event.preventDefault();
@@ -113,12 +113,30 @@ topMenuEl.addEventListener('click', function(event){
                 buildSubMenu(linkObj.subLinks);
             } else {
                 subMenuEl.style.top = "0";
+                console.log(mainEl)
+                mainEl.innerHTML = `<h1>${linkObj.text}</h1>`
             }
         });
     }
 
     console.log(event.target.textContent);
 })
+
+// Add Event Listener to subMenuEl
+
+subMenuEl.addEventListener('click', function(event){
+    event.preventDefault();
+    if (!event.target.matches('a')) return;
+
+    subMenuEl.style.top = "0";
+    topMenuLinks.forEach(link => link.classList.remove("active"));
+
+    // Update mainEl
+    mainEl.innerHTML = `<h1>${event.target.textContent}</h1>`;
+
+    console.log(event.target.textContent);
+})
+
 
 // Helper Function to make subMenu dynamic
 function buildSubMenu(subLinks){
